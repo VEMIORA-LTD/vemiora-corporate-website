@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Script from "next/script";
 import "./globals.css";
 
@@ -88,18 +89,10 @@ const organisationSchema = {
 
   address: {
     "@type": "PostalAddress",
-
-    streetAddress:
-      "167-169 Great Portland Street, 5th Floor",
-
-    addressLocality:
-      "London",
-
-    postalCode:
-      "W1W 5PF",
-
-    addressCountry:
-      "GB",
+    streetAddress: "167-169 Great Portland Street, 5th Floor",
+    addressLocality: "London",
+    postalCode: "W1W 5PF",
+    addressCountry: "GB",
   },
 
   sameAs: [
@@ -108,20 +101,21 @@ const organisationSchema = {
 
   founder: {
     "@type": "Person",
-
     name: "Omar Elmohr",
-
-    jobTitle:
-      "Founder & CEO",
+    jobTitle: "Founder & CEO",
   },
 };
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const nonce =
+    (await headers()).get("x-nonce") ?? undefined;
+
 
   return (
     <html lang="en">
@@ -131,6 +125,7 @@ export default function RootLayout({
         {/* Google Organization Schema */}
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(
               organisationSchema
@@ -143,26 +138,25 @@ export default function RootLayout({
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-J5YBKFQ9C"
           strategy="afterInteractive"
+          nonce={nonce}
         />
 
 
         <Script
           id="google-analytics"
           strategy="afterInteractive"
+          nonce={nonce}
         >
           {`
             window.dataLayer = window.dataLayer || [];
 
-            function gtag(){
+            function gtag() {
               dataLayer.push(arguments);
             }
 
             gtag('js', new Date());
 
-            gtag(
-              'config',
-              'G-J5YBKFQ9C'
-            );
+            gtag('config', 'G-J5YBKFQ9C');
           `}
         </Script>
 
