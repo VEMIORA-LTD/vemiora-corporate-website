@@ -89,11 +89,19 @@ export async function POST(request: Request) {
 
   const name = text(body.name, 120);
   const company = text(body.company, 160);
+  const companyWebsite = text(body.companyWebsite, 300);
   const email = text(body.email, 254);
   const type = text(body.type, 80);
+  const budget = text(body.budget, 80);
+  const contactMethod = text(body.contactMethod, 40);
+  const phone = text(body.phone, 60);
   const brief = text(body.brief, 5000);
+  const utmSource = text(body.utmSource, 120);
+  const utmMedium = text(body.utmMedium, 120);
+  const utmCampaign = text(body.utmCampaign, 180);
+  const landingPage = text(body.landingPage, 500);
 
-  if (!name || !EMAIL_PATTERN.test(email) || !brief) {
+  if (!name || !EMAIL_PATTERN.test(email) || !type || !brief) {
     return NextResponse.json({ error: "Please complete the required fields" }, { status: 400 });
   }
 
@@ -121,7 +129,10 @@ export async function POST(request: Request) {
   const from = process.env.CONTACT_FROM_EMAIL ?? "VEMIORA Website <website@vemiora.uk>";
 
   if (!apiKey) {
-    return NextResponse.json({ error: "Contact service is not configured" }, { status: 503 });
+    return NextResponse.json(
+      { error: "Email service is temporarily unavailable. Please email projects@vemiora.uk." },
+      { status: 503 }
+    );
   }
 
   const response = await fetch("https://api.resend.com/emails", {
@@ -131,13 +142,17 @@ export async function POST(request: Request) {
       from,
       to: [to],
       reply_to: email,
-      subject: `Project enquiry — ${name}`,
-      html: `<h2>New project enquiry</h2><p><strong>Name:</strong> ${escapeHtml(name)}</p><p><strong>Organisation:</strong> ${escapeHtml(company || "Not provided")}</p><p><strong>Email:</strong> ${escapeHtml(email)}</p><p><strong>Project type:</strong> ${escapeHtml(type)}</p><p><strong>Brief:</strong></p><p>${escapeHtml(brief).replace(/\n/g, "<br>")}</p>`,
+      subject: `Project enquiry · ${type} · ${name}`,
+      html: `<h2>New project enquiry</h2><p><strong>Name:</strong> ${escapeHtml(name)}</p><p><strong>Organisation:</strong> ${escapeHtml(company || "Not provided")}</p><p><strong>Email:</strong> ${escapeHtml(email)}</p><p><strong>Telephone / WhatsApp:</strong> ${escapeHtml(phone || "Not provided")}</p><p><strong>Company website:</strong> ${escapeHtml(companyWebsite || "Not provided")}</p><p><strong>Project type:</strong> ${escapeHtml(type)}</p><p><strong>Indicative budget:</strong> ${escapeHtml(budget || "Not decided")}</p><p><strong>Preferred contact:</strong> ${escapeHtml(contactMethod || "Email")}</p><p><strong>Brief:</strong></p><p>${escapeHtml(brief).replace(/\n/g, "<br>")}</p><hr><p><strong>Campaign source:</strong> ${escapeHtml(utmSource || "Direct / unknown")}</p><p><strong>Campaign medium:</strong> ${escapeHtml(utmMedium || "Not provided")}</p><p><strong>Campaign:</strong> ${escapeHtml(utmCampaign || "Not provided")}</p><p><strong>Landing page:</strong> ${escapeHtml(landingPage || "Not provided")}</p>`,
     }),
   });
 
   if (!response.ok) {
-    return NextResponse.json({ error: "Email service rejected the request" }, { status: 502 });
+    console.error("Resend rejected a contact enquiry", response.status, await response.text());
+    return NextResponse.json(
+      { error: "We could not send your enquiry. Please email projects@vemiora.uk." },
+      { status: 502 }
+    );
   }
 
   return NextResponse.json({ ok: true });

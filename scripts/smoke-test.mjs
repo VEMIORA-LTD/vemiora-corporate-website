@@ -27,6 +27,9 @@ for (const file of requiredFiles) {
 
 const layout = await readFile(path.join(root, "app/layout.tsx"), "utf8");
 const shell = await readFile(path.join(root, "app/site-shell.tsx"), "utf8");
+const contactPage = await readFile(path.join(root, "app/contact/page.tsx"), "utf8");
+const contactForm = await readFile(path.join(root, "app/contact/contact-form.tsx"), "utf8");
+const contactApi = await readFile(path.join(root, "app/api/contact/route.ts"), "utf8");
 
 if (!layout.includes("application/ld+json")) {
   throw new Error("Organization structured data is missing");
@@ -34,6 +37,26 @@ if (!layout.includes("application/ld+json")) {
 
 if (!shell.includes('href="/terms"')) {
   throw new Error("Terms page is not linked from the site shell");
+}
+
+if (!contactPage.includes('id="project-enquiry"') || !contactPage.includes("UK-registered technology company")) {
+  throw new Error("Contact landing-page CTA or trust content is missing");
+}
+
+for (const field of ["companyWebsite", "budget", "contactMethod", "phone"]) {
+  if (!contactForm.includes(`name="${field}"`) || !contactApi.includes(`body.${field}`)) {
+    throw new Error(`Contact field is not wired end-to-end: ${field}`);
+  }
+}
+
+if (!contactForm.includes("result?.error")) {
+  throw new Error("Contact form does not surface API errors");
+}
+
+for (const campaignField of ["utmSource", "utmMedium", "utmCampaign", "landingPage"]) {
+  if (!contactForm.includes(campaignField) || !contactApi.includes(`body.${campaignField}`)) {
+    throw new Error(`Campaign attribution is not wired end-to-end: ${campaignField}`);
+  }
 }
 
 console.log(`Smoke test passed: ${requiredFiles.length} required files and core metadata verified.`);
