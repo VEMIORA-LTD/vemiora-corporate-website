@@ -35,6 +35,10 @@ if (!layout.includes("application/ld+json")) {
   throw new Error("Organization structured data is missing");
 }
 
+if (!layout.includes('2229622037970742') || !layout.includes("fbq('track', 'PageView')")) {
+  throw new Error("Meta Pixel is not initialized with the VEMIORA dataset");
+}
+
 if (!shell.includes('href="/terms"')) {
   throw new Error("Terms page is not linked from the site shell");
 }
@@ -51,6 +55,14 @@ for (const field of ["companyWebsite", "budget", "contactMethod", "phone"]) {
 
 if (!contactForm.includes("result?.error")) {
   throw new Error("Contact form does not surface API errors");
+}
+
+if (!contactForm.includes('"Lead"') || !contactForm.includes("eventID: result.eventId")) {
+  throw new Error("Successful enquiries are not tracked as deduplicated Meta Lead events");
+}
+
+if (!contactApi.includes("META_CONVERSIONS_API_TOKEN") || !contactApi.includes("event_id: eventId")) {
+  throw new Error("Meta Conversions API support is missing");
 }
 
 for (const campaignField of ["utmSource", "utmMedium", "utmCampaign", "landingPage"]) {
