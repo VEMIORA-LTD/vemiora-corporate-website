@@ -63,6 +63,94 @@ function escapeHtml(value: string) {
   })[character] ?? character);
 }
 
+function cookie(request: Request, name: string) {
+  const cookies = request.headers.get("cookie") ?? "";
+  return cookies
+    .split(";")
+    .map((item) => item.trim().split("="))
+    .find(([key]) => key === name)
+    ?.slice(1)
+    .join("=");
+}
+
+async function sha256(value: string) {
+  const bytes = new TextEncoder().encode(value.trim().toLowerCase());
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function sendMetaLeadEvent({
+  request,
+  eventId,
+  email,
+  phone,
+  name,
+  type,
+  landingPage,
+}: {
+  request: Request;
+  eventId: string;
+  email: string;
+  phone: string;
+  name: string;
+  type: string;
+  landingPage: string;
+}) {
+  const accessToken = process.env.META_CONVERSIONS_API_TOKEN;
+  const pixelId = process.env.META_PIXEL_ID ?? "2229622037970742";
+  if (!accessToken) return;
+
+  const [firstName, ...lastNameParts] = name.trim().split(/\s+/);
+  const userData: Record<string, string | string[]> = {
+    em: [await sha256(email)],
+    fn: [await sha256(firstName)],
+    client_ip_address: clientIp(request),
+    client_user_agent: request.headers.get("user-agent") ?? "",
+  };
+
+  const lastName = lastNameParts.join(" ");
+  if (lastName) userData.ln = [await sha256(lastName)];
+  if (phone) userData.ph = [await sha256(phone.replace(/[^\d+]/g, ""))];
+
+  const fbp = cookie(request, "_fbp");
+  const fbc = cookie(request, "_fbc");
+  if (fbp) userData.fbp = fbp;
+  if (fbc) userData.fbc = fbc;
+
+  const payload: Record<string, unknown> = {
+    data: [{
+      event_name: "Lead",
+      event_time: Math.floor(Date.now() / 1000),
+      event_id: eventId,
+      action_source: "website",
+      event_source_url: landingPage || "https://www.vemiora.uk/contact",
+      user_data: userData,
+      custom_data: {
+        content_name: "Project enquiry",
+        content_category: type,
+      },
+    }],
+  };
+
+  if (process.env.META_TEST_EVENT_CODE) {
+    payload.test_event_code = process.env.META_TEST_EVENT_CODE;
+  }
+
+  const graphVersion = process.env.META_GRAPH_API_VERSION ?? "v23.0";
+  const response = await fetch(
+    `https://graph.facebook.com/${graphVersion}/${pixelId}/events?access_token=${encodeURIComponent(accessToken)}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }
+  );
+
+  if (!response.ok) {
+    console.error("Meta rejected a Lead event", response.status, await response.text());
+  }
+}
+
 export async function POST(request: Request) {
   const ip = clientIp(request);
 
@@ -155,5 +243,16 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.json({ ok: true });
+  const eventId = crypto.randomUUID();
+  await sendMetaLeadEvent({
+    request,
+    eventId,
+    email,
+    phone,
+    name,
+    type,
+    landingPage,
+  }).catch((error) => console.error("Could not send Meta Lead event", error));
+
+  return NextResponse.json({ ok: true, eventId });
 }

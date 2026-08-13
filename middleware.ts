@@ -34,7 +34,9 @@ export function middleware(request: NextRequest) {
       'self'
       https://www.google-analytics.com
       https://analytics.google.com
-      https://www.googletagmanager.com;
+      https://www.googletagmanager.com
+      https://www.facebook.com
+      https://connect.facebook.net;
 
     object-src 
       'none';

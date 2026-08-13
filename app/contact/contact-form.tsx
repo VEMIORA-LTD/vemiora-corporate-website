@@ -5,6 +5,12 @@ import Script from "next/script";
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 export default function ContactForm({ nonce }: { nonce?: string }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -15,6 +21,7 @@ export default function ContactForm({ nonce }: { nonce?: string }) {
     setStatus("sending");
     setMessage("");
     const form = event.currentTarget;
+    const projectType = String(new FormData(form).get("type") || "Project enquiry");
     const campaign = new URLSearchParams(window.location.search);
     const data = {
       ...Object.fromEntries(new FormData(form).entries()),
@@ -37,6 +44,17 @@ export default function ContactForm({ nonce }: { nonce?: string }) {
       form.reset();
       setStatus("sent");
       setMessage("Thank you. Your enquiry has been sent. We will be in touch shortly.");
+      if (result?.eventId) {
+        window.fbq?.(
+          "track",
+          "Lead",
+          {
+            content_name: "Project enquiry",
+            content_category: projectType,
+          },
+          { eventID: result.eventId }
+        );
+      }
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "We could not send your enquiry. Please email projects@vemiora.uk.");
