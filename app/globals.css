@@ -203,6 +203,34 @@ button, input, textarea, select { font: inherit; }
 .founder-page-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 90px; align-items: start; }
 .founder-page-image img { width: 100%; display: block; filter: grayscale(100%); }
 .kavora-page-logo { width: min(100%, 360px); height: auto; display: block; margin: 0 0 34px; background: #0b1f19; }
+.product-release-grid { grid-template-columns: .86fr 1.14fr; }
+.product-status { display: inline-flex; align-items: center; gap: 9px; }
+.product-status span { width: 7px; height: 7px; border-radius: 50%; background: #2c7a50; box-shadow: 0 0 0 4px rgba(44,122,80,.12); }
+.product-availability h3 { margin-top: 0; font-size: 24px; }
+.store-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 26px; }
+.store-link { min-height: 74px; display: grid; grid-template-columns: 29px 1fr auto; gap: 13px; align-items: center; border: 1px solid rgba(255,255,255,.15); padding: 14px 15px; background: var(--ink); color: white; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+.store-link:hover { transform: translateY(-2px); background: #1b1b1e; border-color: rgba(255,255,255,.28); }
+.store-link svg { width: 28px; height: 28px; fill: currentColor; }
+.store-link span:not(.store-link-arrow) { display: grid; gap: 2px; }
+.store-link small { color: #aeb1b5; font-size: 9px; letter-spacing: .04em; }
+.store-link strong { font-size: 14px; font-weight: 600; }
+.store-link-arrow { color: #777b80; font-size: 13px; }
+.product-availability .download-fallback { margin: 18px 0 0; color: #77797d; font-size: 11px; }
+.download-fallback a { border-bottom: 1px solid #96989b; padding-bottom: 2px; color: var(--ink); }
+.tutorial-links { display: flex; align-items: center; justify-content: space-between; gap: 40px; margin-top: 70px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 25px 0; }
+.tutorial-links p { margin: 0; color: #65676b; font-size: 13px; line-height: 1.6; }
+.tutorial-links p span { display: block; margin-bottom: 3px; color: var(--ink); font-weight: 650; }
+.tutorial-links > div { display: flex; flex: 0 0 auto; gap: 10px; }
+.tutorial-links a { min-width: 145px; display: flex; justify-content: space-between; gap: 18px; border: 1px solid var(--line); padding: 13px 14px; font-size: 11px; font-weight: 620; transition: background .2s ease, color .2s ease; }
+.tutorial-links a:hover { background: var(--ink); color: white; }
+.seshura-section { padding-top: 120px; padding-bottom: 120px; }
+.seshura-grid { grid-template-columns: .9fr 1.1fr; align-items: center; }
+.seshura-logo-frame { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: #f5efe5; }
+.seshura-logo-frame::after { content: ""; position: absolute; inset: 0; border: 14px solid rgba(11,11,13,.06); pointer-events: none; }
+.seshura-logo { width: 100%; height: auto; display: block; }
+.seshura-copy h2 { font-size: clamp(56px, 6vw, 84px); }
+.seshura-copy > p:not(.eyebrow):not(.lead) { max-width: 590px; color: #aeb2b5; font-size: 14px; line-height: 1.8; }
+.seshura-tagline { margin-top: 38px; border-top: 1px solid rgba(255,255,255,.18); padding-top: 20px; color: #d2ae5f; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; }
 .founder-page-copy h2 { margin-bottom: 30px; }
 .founder-page-copy p { color: #5e6065; font-size: 16px; line-height: 1.85; }
 .company-facts { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
@@ -330,6 +358,8 @@ button, input, textarea, select { font: inherit; }
   .capability-row { grid-template-columns: 60px 1fr; }
   .capability-row p { grid-column: 2; }
   .content-grid.three { grid-template-columns: 1fr; }
+  .product-release-grid, .seshura-grid { grid-template-columns: 1fr; }
+  .seshura-logo-frame { max-width: 560px; }
 }
 
 @media (max-width: 560px) {
@@ -366,6 +396,11 @@ button, input, textarea, select { font: inherit; }
   .contact-proof-grid p { grid-column: auto; }
   .form-row { grid-template-columns: 1fr; }
   .content-grid { grid-template-columns: 1fr; gap: 40px; }
+  .store-links { grid-template-columns: 1fr; }
+  .tutorial-links { align-items: stretch; flex-direction: column; gap: 20px; }
+  .tutorial-links > div { display: grid; grid-template-columns: 1fr; }
+  .tutorial-links a { min-width: 0; }
+  .seshura-section { padding-top: 82px; padding-bottom: 82px; }
   .capability-row { grid-template-columns: 42px 1fr; gap: 15px; }
   .contact-option { grid-template-columns: 1fr; gap: 8px; }
 }
