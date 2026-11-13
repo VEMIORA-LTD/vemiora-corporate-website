@@ -20,7 +20,7 @@ export default function QuranAppPrivacyPage() {
       <section className="content-section">
         <div className="legal-copy">
           <p>Last updated: 21 October 2026</p>
-          <p><a href="#arabic-policy" lang="ar">قراءة السياسة بالعربية</a></p>
+          <p><a href="#arabic-policy" lang="ar">قراءة السياسة بالعربية</a> · <a href="/quran_app_terms">App terms of use · شروط استخدام التطبيق</a></p>
 
           <h2>About this policy</h2>
           <p>This policy covers the reading, translation and listening edition of Quran: Listen, Read (Android package: uk.vemiora.quran_app), published by VEMIORA LTD, a company registered in England and Wales under number 17352395. Our registered office is 167–169 Great Portland Street, 5th Floor, London W1W 5PF, United Kingdom.</p>
