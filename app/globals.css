@@ -404,3 +404,10 @@ button, input, textarea, select { font: inherit; }
   .capability-row { grid-template-columns: 42px 1fr; gap: 15px; }
   .contact-option { grid-template-columns: 1fr; gap: 8px; }
 }
+
+/* App-specific bilingual legal reading layout. */
+.app-terms-copy p { margin: 1em 0; overflow-wrap: anywhere; }
+.app-terms-copy article > section { margin-top: 34px; }
+.app-terms-copy h3 { font-size: 20px; line-height: 1.6; font-weight: 600; }
+.app-terms-copy article { scroll-margin-top: 110px; }
+.app-terms-copy hr { margin: 64px 0; border: 0; border-top: 1px solid var(--line, #d8d8d5); }

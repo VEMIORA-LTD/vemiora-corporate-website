@@ -10,6 +10,8 @@ const routes = [
   "/privacy",
   "/cookies",
   "/terms",
+  "/quran_app_privacy",
+  "/quran_app_terms",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -17,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return routes.map((route) => ({
     url: `https://vemiora.uk${route}`,
-    lastModified,
+    lastModified: route.startsWith("/quran_app_") ? new Date("2026-11-13T00:00:00+04:00") : lastModified,
     changeFrequency: route === "" ? "weekly" : "monthly",
     priority: route === "" ? 1 : route === "/contact" ? 0.8 : 0.7,
   }));
