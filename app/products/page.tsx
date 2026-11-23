@@ -35,10 +35,10 @@ export default function ProductsPage() {
     <PageHero eyebrow="Digital product portfolio" title="Products designed to make everyday life work better." lead="VEMIORA develops and owns a growing portfolio of digital assets, each built around a meaningful customer need and the potential to serve an international audience." />
     <section className="content-section product-release">
       <div className="content-grid product-release-grid">
-        <div><Image className="kavora-page-logo" src="/kavora-logo-2026.png" alt="KAVORA — The World of Animal Care" width={562} height={484} priority /><p className="eyebrow dark product-status"><span aria-hidden="true" /> Available now</p><h2>KAVORA</h2><p className="lead">A global destination for pet owners to discover participating providers nearby, compare services and book care through one connected platform.</p></div>
+        <div><Image className="kavora-page-logo" src="/kavora-logo-2026.png" alt="KAVORA — The World of Animal Care" width={562} height={484} priority /><p className="eyebrow dark product-status"><span aria-hidden="true" /> Available now</p><h2>KAVORA</h2><p className="lead">Pet adoption, animal welfare, pet-friendly places and pet care services, brought together in one app.</p></div>
         <div className="content-card product-availability">
-          <h3>One platform. A world of pet care.</h3>
-          <p>KAVORA is available on mobile, desktop and the web. It connects registered pet owners with participating providers including pet sitters, pet taxis, groomers, veterinary clinics, boarding services, horse training and specialist services.</p>
+          <h3>A more connected world for pets.</h3>
+          <p>Whether you want to adopt a dog or cat, help an animal in need, discover places to visit with your pet or connect with a pet care provider, KAVORA helps you explore the options available in your area.</p>
           <p>Choose your platform to start using KAVORA.</p>
           <div className="store-links" aria-label="Download KAVORA">
             {storeLinks.map((store) => <a key={store.name} className="store-link" href={store.href} target="_blank" rel="noreferrer" aria-label={`${store.eyebrow} ${store.name}`}><StoreIcon type={store.icon} /><span><small>{store.eyebrow}</small><strong>{store.name}</strong></span><span className="store-link-arrow" aria-hidden="true">↗</span></a>)}
@@ -48,12 +48,14 @@ export default function ProductsPage() {
       </div>
     </section>
     <section className="content-section alt">
-      <p className="eyebrow dark">KAVORA ecosystem</p><h2>Care, booking and discovery in one place.</h2>
-      <div className="content-grid three">
-        <article className="content-card"><h3>For pet owners</h3><p>Discover relevant services, view participating providers and manage bookings through a consistent experience.</p></article>
-        <article className="content-card"><h3>For service providers</h3><p>Present services to pet owners, receive booking opportunities and build a visible presence within the platform.</p></article>
-        <article className="content-card"><h3>For the wider pet community</h3><p>A scalable foundation designed to support different animals, service categories and countries over time.</p></article>
+      <p className="eyebrow dark">Built for pet lovers</p><h2>Adoption, compassion and everyday care.</h2>
+      <div className="content-grid product-features">
+        <article className="content-card"><h3>Pet adoption &amp; rehoming</h3><p>Browse dog, cat and other pet rehoming listings. Review the available information and explore opportunities to give an animal a new home. Listings and availability depend on your location.</p></article>
+        <article className="content-card"><h3>Help an animal</h3><p>Discover posts about animals that need help, share information and connect with people who care about animal welfare. KAVORA supports community efforts and does not replace emergency veterinary or rescue services.</p></article>
+        <article className="content-card"><h3>Discover pet-friendly places</h3><p>Explore parks, beaches, cafes, restaurants, hotels and other destinations to visit with your pet, nearby or on a trip. Always check each venue&apos;s current pet policy before visiting.</p></article>
+        <article className="content-card"><h3>Find pet care providers</h3><p>Explore services and provider profiles for pet sitting, grooming and other care where available. Request a booking when supported by the provider. Provider availability varies by location.</p></article>
       </div>
+      <div className="content-card product-about"><h3>About KAVORA</h3><p>Inspired by the ancient Egyptian concept of Ka, the vital essence of life, and Aura, the presence surrounding living beings, KAVORA celebrates life, compassion and the bond between animals and people. Its emblem reimagines the Ankh, the ancient Egyptian symbol of life.</p></div>
       <div className="tutorial-links" aria-label="KAVORA service provider tutorials"><p><span>Service provider tutorials</span> Step-by-step guidance for registering and getting started.</p><div><a href="https://youtu.be/yWOf4aLoiak" target="_blank" rel="noreferrer">English tutorial <span aria-hidden="true">↗</span></a><a href="https://youtu.be/SQ1mFSkWvbA" target="_blank" rel="noreferrer">Arabic tutorial <span aria-hidden="true">↗</span></a></div></div>
     </section>
     <section className="content-section product-release" aria-labelledby="quran-product-title">
@@ -62,17 +64,27 @@ export default function ProductsPage() {
           <Image className="quran-page-logo" src="/quran-logo.png" alt="القرآن الكريم — Quran app" width={1254} height={1254} />
           <p className="eyebrow dark product-status"><span aria-hidden="true" /> Available now</p>
           <h2 id="quran-product-title">Quran: Listen, Read</h2>
-          <p className="lead">Read the Holy Quran, explore translations and listen to recitations in one app.</p>
+          <p className="lead">Read the Holy Quran, listen to recitations and explore translations of its meanings, with English and Arabic interfaces.</p>
         </div>
         <div className="content-card product-availability">
           <h3>The Holy Quran, wherever you are.</h3>
-          <p>Quran: Listen, Read is available on iPhone and Android. Choose your store to download the app and start reading or listening.</p>
+          <p>Available on iPhone and Android, with no account or sign-in required and no advertising. Your preferences, reading positions and downloaded content are stored on your device.</p>
           <div className="store-links" aria-label="Download Quran: Listen, Read">
             {quranStoreLinks.map((store) => <a key={store.name} className="store-link" href={store.href} target="_blank" rel="noreferrer" aria-label={`Download Quran: Listen, Read from ${store.name}`}><StoreIcon type={store.icon} /><span><small>{store.eyebrow}</small><strong>{store.name}</strong></span></a>)}
           </div>
+          <p>An internet connection is needed to stream recitations and download audio or translations. Downloaded content is available offline.</p>
           <p className="quran-policy-links"><Link href="/quran_app_privacy">Privacy policy</Link><span aria-hidden="true"> · </span><Link href="/quran_app_terms">Terms of use</Link></p>
         </div>
       </div>
+    </section>
+    <section className="content-section alt" aria-labelledby="quran-features-title">
+      <p className="eyebrow dark">Inside Quran: Listen, Read</p><h2 id="quran-features-title">Read, listen and explore.</h2>
+      <div className="content-grid three product-features">
+        <article className="content-card"><h3>Read the Quran</h3><p>Browse the Arabic Quran text in the Madinah Mushaf page layout, continue from your saved position and read without an internet connection.</p></article>
+        <article className="content-card"><h3>Listen to recitations</h3><p>Choose from a selection of reciters and available Murattal and Mujawwad recitations. Select a surah to stream online, or download recitations to listen offline.</p></article>
+        <article className="content-card"><h3>Explore translations</h3><p>Read translations of the Quran&apos;s meanings in multiple languages, provided by QuranEnc. View translation and source information, and access downloaded translations offline.</p></article>
+      </div>
+      <div className="content-card product-about"><p>The Quran&apos;s Arabic text remains in Arabic. Translations present its meanings in other languages.</p><p>Quran text: Tanzil Project. Recitations: MP3Quran. Translations of meanings: QuranEnc.</p><p>Developed and published by VEMIORA LTD. Support: <a href="mailto:welcome@vemiora.uk">welcome@vemiora.uk</a>.</p></div>
     </section>
     <section className="content-section dark seshura-section">
       <div className="content-grid seshura-grid">

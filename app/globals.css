@@ -203,6 +203,9 @@ button, input, textarea, select { font: inherit; }
 .founder-page-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 90px; align-items: start; }
 .founder-page-image img { width: 100%; display: block; filter: grayscale(100%); }
 .kavora-page-logo { width: min(100%, 360px); height: auto; display: block; margin: 0 0 34px; background: #0b1f19; }
+.product-features { margin-top: 48px; }
+.product-about { margin-top: 48px; }
+.product-about a { text-decoration: underline; text-underline-offset: 3px; }
 .quran-page-logo { width: min(100%, 360px); height: auto; display: block; margin: 0 0 34px; }
 .quran-policy-links a { text-decoration: underline; text-underline-offset: 3px; }
 .product-release-grid { grid-template-columns: .86fr 1.14fr; }
