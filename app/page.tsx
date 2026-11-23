@@ -113,18 +113,18 @@ export default function Home() {
               height={484}
             />
             <p className="eyebrow">VEMIORA product portfolio</p>
-            <span className="status-pill">In development · Near launch</span>
+            <span className="status-pill">Available now</span>
             <h2>KAVORA</h2>
             <p className="product-intro">
-              A connected destination for pet owners and trusted service
-              providers — designed to simplify everyday animal care across the
-              world.
+              Pet adoption, animal welfare, pet-friendly places and pet care
+              services, brought together in one app. Explore the options
+              available in your community.
             </p>
             <ul className="product-list">
-              <li>Pet sitting & boarding</li>
-              <li>Pet taxi & grooming</li>
-              <li>Veterinary clinics</li>
-              <li>Horse training & specialist services</li>
+              <li>Pet adoption &amp; rehoming</li>
+              <li>Animal help &amp; welfare</li>
+              <li>Pet-friendly places</li>
+              <li>Pet care providers</li>
             </ul>
             <Link className="text-link pale" href="/products">
               Discover KAVORA <span aria-hidden="true">→</span>
