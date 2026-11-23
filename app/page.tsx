@@ -107,10 +107,10 @@ export default function Home() {
           <div className="product-copy">
             <Image
               className="product-brand-logo"
-              src="/kavora-logo.png"
+              src="/kavora-logo-2026.png"
               alt="KAVORA — The World of Animal Care"
-              width={1200}
-              height={1212}
+              width={562}
+              height={484}
             />
             <p className="eyebrow">VEMIORA product portfolio</p>
             <span className="status-pill">In development · Near launch</span>
@@ -134,10 +134,10 @@ export default function Home() {
             <div className="device device-back kavora-brand-device">
               <Image
                 className="kavora-logo-preview"
-                src="/kavora-logo.png"
+                src="/kavora-logo-2026.png"
                 alt="KAVORA — The World of Animal Care"
-                width={1200}
-                height={1212}
+                width={562}
+                height={484}
               />
             </div>
             <div className="device device-front">

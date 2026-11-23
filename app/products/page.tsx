@@ -6,7 +6,7 @@ import { PageHero, SiteFooter, SiteHeader } from "../site-shell";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Explore VEMIORA products: KAVORA is available now across mobile, desktop and web, while SESHURA is currently in development.",
+    "Explore VEMIORA products: KAVORA and Quran: Listen, Read are available now, while SESHURA is currently in development.",
   alternates: { canonical: "/products" },
 };
 
@@ -15,6 +15,11 @@ const storeLinks = [
   { name: "Google Play", eyebrow: "Get it on", href: "https://play.google.com/store/apps/details?id=com.vemiora.kavora", icon: "play" },
   { name: "Microsoft Store", eyebrow: "Download from", href: "https://apps.microsoft.com/detail/9N4VC9084GFD", icon: "microsoft" },
   { name: "Web App", eyebrow: "Use KAVORA on the", href: "https://app.kavoraplatform.com", icon: "web" },
+] as const;
+
+const quranStoreLinks = [
+  { name: "App Store", eyebrow: "Download on the", href: "https://apps.apple.com/app/quran-listen-read/id6825641956", icon: "apple" },
+  { name: "Google Play", eyebrow: "Get it on", href: "https://play.google.com/store/apps/details?id=uk.vemiora.quran_app&pcampaignid=web_share", icon: "play" },
 ] as const;
 
 function StoreIcon({ type }: { type: (typeof storeLinks)[number]["icon"] }) {
@@ -30,7 +35,7 @@ export default function ProductsPage() {
     <PageHero eyebrow="Digital product portfolio" title="Products designed to make everyday life work better." lead="VEMIORA develops and owns a growing portfolio of digital assets, each built around a meaningful customer need and the potential to serve an international audience." />
     <section className="content-section product-release">
       <div className="content-grid product-release-grid">
-        <div><Image className="kavora-page-logo" src="/kavora-logo.png" alt="KAVORA — The World of Animal Care" width={1200} height={1212} priority /><p className="eyebrow dark product-status"><span aria-hidden="true" /> Available now</p><h2>KAVORA</h2><p className="lead">A global destination for pet owners to discover participating providers nearby, compare services and book care through one connected platform.</p></div>
+        <div><Image className="kavora-page-logo" src="/kavora-logo-2026.png" alt="KAVORA — The World of Animal Care" width={562} height={484} priority /><p className="eyebrow dark product-status"><span aria-hidden="true" /> Available now</p><h2>KAVORA</h2><p className="lead">A global destination for pet owners to discover participating providers nearby, compare services and book care through one connected platform.</p></div>
         <div className="content-card product-availability">
           <h3>One platform. A world of pet care.</h3>
           <p>KAVORA is available on mobile, desktop and the web. It connects registered pet owners with participating providers including pet sitters, pet taxis, groomers, veterinary clinics, boarding services, horse training and specialist services.</p>
@@ -51,13 +56,31 @@ export default function ProductsPage() {
       </div>
       <div className="tutorial-links" aria-label="KAVORA service provider tutorials"><p><span>Service provider tutorials</span> Step-by-step guidance for registering and getting started.</p><div><a href="https://youtu.be/yWOf4aLoiak" target="_blank" rel="noreferrer">English tutorial <span aria-hidden="true">↗</span></a><a href="https://youtu.be/SQ1mFSkWvbA" target="_blank" rel="noreferrer">Arabic tutorial <span aria-hidden="true">↗</span></a></div></div>
     </section>
+    <section className="content-section product-release" aria-labelledby="quran-product-title">
+      <div className="content-grid product-release-grid">
+        <div>
+          <Image className="quran-page-logo" src="/quran-logo.png" alt="القرآن الكريم — Quran app" width={1254} height={1254} />
+          <p className="eyebrow dark product-status"><span aria-hidden="true" /> Available now</p>
+          <h2 id="quran-product-title">Quran: Listen, Read</h2>
+          <p className="lead">Read the Holy Quran, explore translations and listen to recitations in one app.</p>
+        </div>
+        <div className="content-card product-availability">
+          <h3>The Holy Quran, wherever you are.</h3>
+          <p>Quran: Listen, Read is available on iPhone and Android. Choose your store to download the app and start reading or listening.</p>
+          <div className="store-links" aria-label="Download Quran: Listen, Read">
+            {quranStoreLinks.map((store) => <a key={store.name} className="store-link" href={store.href} target="_blank" rel="noreferrer" aria-label={`Download Quran: Listen, Read from ${store.name}`}><StoreIcon type={store.icon} /><span><small>{store.eyebrow}</small><strong>{store.name}</strong></span></a>)}
+          </div>
+          <p className="quran-policy-links"><Link href="/quran_app_privacy">Privacy policy</Link><span aria-hidden="true"> · </span><Link href="/quran_app_terms">Terms of use</Link></p>
+        </div>
+      </div>
+    </section>
     <section className="content-section dark seshura-section">
       <div className="content-grid seshura-grid">
         <div className="seshura-logo-frame"><Image className="seshura-logo" src="/seshura-logo.png" alt="SESHURA — Connecting People with Trusted Expertise" width={1000} height={1000} loading="eager" /></div>
         <div className="seshura-copy"><p className="eyebrow">Currently in development</p><h2>SESHURA</h2><p className="lead">A new platform designed to connect people with trusted expertise.</p><p>SESHURA is the next product being developed within the VEMIORA portfolio. More information will be shared as the platform moves closer to public release.</p><div className="seshura-tagline">Connecting people with trusted expertise</div></div>
       </div>
     </section>
-    <section className="cta-section"><p className="eyebrow dark">VEMIORA portfolio</p><h2>One product live. The next taking shape.</h2><p>KAVORA is available today, while SESHURA represents the next step in VEMIORA&apos;s growing product portfolio.</p><Link className="button button-dark" href="/contact">Talk to VEMIORA <span>↗</span></Link></section>
+    <section className="cta-section"><p className="eyebrow dark">VEMIORA portfolio</p><h2>Our portfolio is growing.</h2><p>KAVORA and Quran: Listen, Read are available today, while SESHURA represents the next step in VEMIORA&apos;s growing product portfolio.</p><Link className="button button-dark" href="/contact">Talk to VEMIORA <span>↗</span></Link></section>
     <SiteFooter />
   </main>;
 }
