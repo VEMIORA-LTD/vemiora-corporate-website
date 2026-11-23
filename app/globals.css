@@ -115,7 +115,7 @@ button, input, textarea, select { font: inherit; }
 
 .product-section { background: #141518; }
 .product-layout { min-height: 760px; display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; padding-top: 110px; padding-bottom: 110px; }
-.product-brand-logo { width: 132px; height: 132px; display: block; margin: 0 0 32px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; object-fit: cover; }
+.product-brand-logo { width: 180px; height: auto; display: block; margin: 0 0 32px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; object-fit: contain; }
 .status-pill { display: inline-block; margin: 3px 0 28px; border: 1px solid rgba(255,255,255,.22); border-radius: 99px; padding: 9px 13px; color: #bac0c5; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
 .product-copy h2 { font-size: clamp(70px, 8vw, 116px); line-height: .9; }
 .product-intro { max-width: 500px; margin: 30px 0; color: #bfc2c5; font-size: 17px; line-height: 1.7; }

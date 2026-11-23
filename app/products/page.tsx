@@ -35,7 +35,7 @@ export default function ProductsPage() {
     <PageHero eyebrow="Digital product portfolio" title="Products designed to make everyday life work better." lead="VEMIORA develops and owns a growing portfolio of digital assets, each built around a meaningful customer need and the potential to serve an international audience." />
     <section className="content-section product-release">
       <div className="content-grid product-release-grid">
-        <div><Image className="kavora-page-logo" src="/kavora-logo.png" alt="KAVORA — The World of Animal Care" width={1200} height={1212} priority /><p className="eyebrow dark product-status"><span aria-hidden="true" /> Available now</p><h2>KAVORA</h2><p className="lead">A global destination for pet owners to discover participating providers nearby, compare services and book care through one connected platform.</p></div>
+        <div><Image className="kavora-page-logo" src="/kavora-logo-2026.png" alt="KAVORA — The World of Animal Care" width={562} height={484} priority /><p className="eyebrow dark product-status"><span aria-hidden="true" /> Available now</p><h2>KAVORA</h2><p className="lead">A global destination for pet owners to discover participating providers nearby, compare services and book care through one connected platform.</p></div>
         <div className="content-card product-availability">
           <h3>One platform. A world of pet care.</h3>
           <p>KAVORA is available on mobile, desktop and the web. It connects registered pet owners with participating providers including pet sitters, pet taxis, groomers, veterinary clinics, boarding services, horse training and specialist services.</p>
